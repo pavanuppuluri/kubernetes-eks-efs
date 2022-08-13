@@ -59,3 +59,6 @@ aws ec2 describe-subnets \
 --query 'Subnets[*].{SubnetId: SubnetId,AvailabilityZone: AvailabilityZone,CidrBlock: CidrBlock}' \
 --output table
 ````
+Output should look like this -
+
+![Screenshot](img/subnets.png)
