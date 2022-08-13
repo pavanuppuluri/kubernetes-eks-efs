@@ -62,3 +62,63 @@ aws ec2 describe-subnets \
 Output should look like this -
 
 ![Screenshot](img/subnets.png)
+
+<b>Step 8</b>
+
+Execute below command to mount targets for the subnets that your nodes are in
+
+````
+aws efs create-mount-target \
+--file-system-id $FILE_SYSTEM_ID \
+--subnet-id subnet-07871e03cfeee45ba \
+--security-groups $MOUNT_TARGET_GROUP_ID
+````
+ 
+````
+aws efs create-mount-target \
+--file-system-id $FILE_SYSTEM_ID \
+--subnet-id subnet-007c8211f22ef1335 \
+--security-groups $MOUNT_TARGET_GROUP_ID
+````
+
+<b>Step 9</b>
+Create storage class
+
+````
+kubectl apply -f storage-class.yaml
+````
+
+<b>Step 10</b>
+Create persistent volume
+
+````
+kubectl apply -f persistent-volume.yaml
+````
+
+<b>Step 11</b>
+Create persistent volume claim
+
+````
+kubectl apply -f persistent-volume-claim.yaml
+````
+
+<b>Step 12</b>
+Create Pod1 and mount above persistient volume to /data folder
+
+````
+kubectl apply -f pod1.yaml
+````
+
+<b>Step 13</b>
+Create Pod1 and mount above persistient volume to /data folder
+
+````
+kubectl apply -f pod2.yaml
+````
+
+### Check if EKS Cluster Pods able to access the EFS or not
+
+![Screenshot](img/result.png)
+
+#### Note
+As we can see Pod1 able to access out2.txt created by Pod2 and Pod2 able to access out1.txt created by Pod1.
