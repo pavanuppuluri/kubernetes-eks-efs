@@ -1,8 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: efs-claim
-  namespace: ${DC_INST_ID}-tutorial
+  name: efs-claim  
 spec:
   accessModes:
     - ReadWriteMany
